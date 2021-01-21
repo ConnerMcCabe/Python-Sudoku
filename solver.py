@@ -12,6 +12,22 @@ board = [
     [0, 5, 0, 0, 0, 0, 2, 0, 0],
 ]
 
+def solve(b):
+    find = find_empty(b)
+    if not find:
+        return True
+    else: 
+        row, col = find
+
+    for i in range(1, 10):
+        if valid(b, i, (row, col)):
+            b[row][col] = i
+
+            if solve(b):
+                return True
+            b[row][col] = 0
+    return False
+
 def valid(b, num, pos):
     #check the row
     for i in range(len(b[0])):
@@ -34,18 +50,23 @@ def print_board(b):
     for i in range(len(b)):
         if i % 3 == 0 and i != 0:
             print(" - - - - - - - - - - - ")
-        
+        #for printing appropriate horizontal line breaks in term
         for j in range(len(b[0])):
             if j % 3 == 0 and j != 0:
                 print(" | ", end="")
-
+        #for printing appropriate vertical line breaks in term
             if j == 8:
                 print(b[i][j])
             else:
                 print(str(b[i][j]) + " ", end="")
-print_board(board)
+
 def find_empty(b):
     for i in range(len(b)):
         for j in range(len(b[0])):
             if b[i][j] == 0:
                 return (i, j)
+
+print_board(board)
+solve(board)
+print(" //////////////////// ")
+print_board(board)
