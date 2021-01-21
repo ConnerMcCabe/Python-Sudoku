@@ -35,7 +35,7 @@ def valid(b, num, pos):
             return False
     #check the column
     for i in range(len(b)):
-        if b[i][pos[1]] == num and pos[1] != i:
+        if b[i][pos[1]] == num and pos[0] != i:
             return False
     #check the box
     box_x = pos[1] // 3
